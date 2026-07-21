@@ -62,7 +62,7 @@
 
     <div class="container" id="main-container">
         <h1>LUYỆN TẬP PHÁT ÂM NÂNG CAO</h1>
-        <div class="sub-type">CHỦ ĐỀ: CỤM TỪ & CÂU GIAO TIẾP (50 CÂU - 30S/CÂU)</div>
+        <div class="sub-type">CHỦ ĐỀ: GIA ĐÌNH & CON VẬT (50 CÂU - 30S/CÂU)</div>
         <div id="lesson-subtitle">UNIT 2: FAMILY & PETS COLLOCATIONS</div>
         
         <div class="info-bar" id="top-info-bar">
@@ -88,7 +88,7 @@
     <script>
         const lessonsData = {
             "1": {
-                title: "50 CỤM TỪ & CÂU NÂNG CAO: GIA ĐÌNH & THÚ CƯNG",
+                title: "50 CỤM TỪ & CÂU NÂNG CAO: GIA ĐÌNH VÀ CON VẬT",
                 items: [
                     // Phần 1: Cụm từ ghép chủ đề Gia đình & Tính cách (Phrases & Collocations)
                     { type: "phrase", text: "A close-knit family", ipa: "/ə kləʊs nɪt ˈfæməli/", meaning: "Một gia đình gắn bó khăng khít" },
@@ -117,16 +117,16 @@
                     // Phần 3: Cụm từ ghép chủ đề Thú cưng & Động vật (Pet Phrases & Collocations)
                     { type: "phrase", text: "An adorable furry friend", ipa: "/ən əˈdɔːrəbl ˈfɜːri frend/", meaning: "Một người bạn có lông đáng yêu" },
                     { type: "phrase", text: "A loyal companion", ipa: "/ə ˈlɔɪəl kəmˈpæniən/", meaning: "Một người bạn đồng hành trung thành" },
-                    { type: "phrase", text: "Play fetch in the garden", ipa: "/pleɪ fetʃ ɪn ðə ˈɡɑːdn/", meaning: "Chơi ném bắthóng bóng ngoài vườn" },
+                    { type: "phrase", text: "Play fetch in the garden", ipa: "/pleɪ fetʃ ɪn ðə ˈɡɑːdn/", meaning: "Chơi ném bắt bóng ngoài vườn" },
                     { type: "phrase", text: "Wag its tail happily", ipa: "/wæɡ ɪts teɪl ˈhæpɪli/", meaning: "Vẫy đuôi mừng vui vẻ" },
                     { type: "phrase", text: "Purr softly on my lap", ipa: "/pɜːr ˈsɒftli ɒn maɪ læp/", meaning: "Kêu gừ gừ nhẹ nhàng trên lòng tôi" },
                     { type: "phrase", text: "Feed the pets on time", ipa: "/fiːd ðə pets ɒn taɪm/", meaning: "Cho thú cưng ăn đúng giờ" },
                     { type: "phrase", text: "Take the dog for a walk", ipa: "/teɪk ðə dɒɡ fɔːr ə wɔːk/", meaning: "Dắt chú chó đi dạo" },
                     { type: "phrase", text: "Brush its soft fur", ipa: "/brʌʃ ɪts sɒft fɜːr/", meaning: "Chải bộ lông mềm mại của nó" },
                     { type: "phrase", text: "Train a clever puppy", ipa: "/treɪn ə ˈklevər ˈpʌpi/", meaning: "Huấn luyện một chú cún thông minh" },
-                    { type: "phrase", text: "Keep pets clean and safe", meaning: "/kiːp pets kliːn ənd seɪf/", meaning: "Giữ cho thú cưng sạch sẽ và an toàn" },
-                    { type: "phrase", text: "Watch cute animal videos", meaning: "/wɒtʃ kjuːt ˈænɪml ˈvɪdiəʊz/", meaning: "Xem video động vật dễ thương" },
-                    { type: "phrase", text: "Protect wild animals", meaning: "/prəˈtekt waɪld ˈænɪmlz/", meaning: "Bảo vệ động vật hoang dã" },
+                    { type: "phrase", text: "Keep pets clean and safe", ipa: "/kiːp pets kliːn ənd seɪf/", meaning: "Giữ cho thú cưng sạch sẽ và an toàn" },
+                    { type: "phrase", text: "Watch cute animal videos", ipa: "/wɒtʃ kjuːt ˈænɪml ˈvɪdiəʊz/", meaning: "Xem video động vật dễ thương" },
+                    { type: "phrase", text: "Protect wild animals", ipa: "/prəˈtekt waɪld ˈænɪmlz/", meaning: "Bảo vệ động vật hoang dã" },
 
                     // Phần 4: Cụm câu giao tiếp diễn tả tình yêu thú cưng và thiên nhiên
                     { type: "sentence", text: "My pet dog greets me when I come home", meaning: "Chú chó cưng chào đón tôi khi tôi về nhà" },
@@ -164,7 +164,7 @@
         let itemIndices = [];
         let itemStatus = [];
         let currentIndex = 0;
-        let totalSeconds = 50 * 30; // 25 phút tổng cộng
+        let totalSeconds = 50 * 30; // 25 phút
         let initialSeconds = 50 * 30; 
         let timerInterval;
         let lastSessionMessage = "🎉 HOÀN THÀNH BÀI LUYỆN TẬP PHÁT ÂM NÂNG CAO!";
@@ -189,10 +189,25 @@
             };
         }
 
+        // Thuật toán xáo trộn ngẫu nhiên (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
         function initQuiz() {
+            // Đóng gói từng câu cùng index gốc để theo dõi đúng trạng thái
             let combined = originalItems.map((item, index) => ({ item, index }));
-            activeItems = combined.map(item => item.item);
-            itemIndices = combined.map(item => item.index);
+            
+            // Xáo trộn ngẫu nhiên thứ tự các câu trong đề
+            let shuffledCombined = shuffleArray(combined);
+
+            activeItems = shuffledCombined.map(c => c.item);
+            itemIndices = shuffledCombined.map(c => c.index);
             itemStatus = new Array(originalItems.length).fill('pending');
             currentIndex = 0;
             totalSeconds = 50 * 30; 
