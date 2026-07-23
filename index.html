@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIẾNG ANH - HỆ THỐNG LUYỆN TẬP PHÁT ÂM NÂNG CAO</title>
     
-    <!-- Nhúng file dữ liệu bài học trực tiếp để đồng bộ trên GitHub Pages -->
+    <!-- Nhúng trực tiếp file dữ liệu bài học -->
     <script src="./data/lesson1.js"></script>
 
     <style>
@@ -101,7 +101,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const lessonId = urlParams.get('lesson') || "1";
 
-        // Hàm nạp dữ liệu từ biến lessonsData đã được khai báo ở file lesson1.js
         function loadLessonData() {
             try {
                 if (typeof lessonsData === 'undefined' || !lessonsData[lessonId]) {
@@ -114,7 +113,7 @@
                 document.getElementById('lesson-subtitle').innerText = currentLesson.title;
                 
                 originalItems = [...currentLesson.items];
-                totalSeconds = originalItems.length * 30; // 30 giây / câu
+                totalSeconds = originalItems.length * 30; 
                 initialSeconds = totalSeconds;
 
                 initQuiz();
@@ -192,22 +191,12 @@
         function showQuestion() {
             if (currentIndex < activeItems.length) {
                 const currentItem = activeItems[currentIndex];
-                let displayHtml = "";
-                
-                if (currentItem.type === "phrase") {
-                    displayHtml = `
-                        <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">TỪ VỰNG / CỤM TỪ (PHÁT ÂM -ED)</div>
-                        <div>${currentItem.text}</div>
-                        <div style="font-size: 15px; color: #9b59b6; font-weight: normal; margin-top: 4px;">Phiên âm: ${currentItem.ipa}</div>
-                        <div class="vietnamese-translation">Ý nghĩa: ${currentItem.meaning}</div>
-                    `;
-                } else {
-                    displayHtml = `
-                        <div style="font-size: 13px; color: #9b59b6; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CÂU LUYỆN TẬP</div>
-                        <div>${currentItem.text.charAt(0).toUpperCase() + currentItem.text.slice(1)}</div>
-                        <div class="vietnamese-translation">Ý nghĩa: ${currentItem.meaning}</div>
-                    `;
-                }
+                let displayHtml = `
+                    <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">TỪ VỰNG / CỤM TỪ (PHÁT ÂM -ED)</div>
+                    <div>${currentItem.text}</div>
+                    <div style="font-size: 15px; color: #9b59b6; font-weight: normal; margin-top: 4px;">Phiên âm: ${currentItem.ipa}</div>
+                    <div class="vietnamese-translation">Ý nghĩa: ${currentItem.meaning}</div>
+                `;
 
                 document.getElementById('question').innerHTML = displayHtml;
                 document.getElementById('progress').innerHTML = "Câu hỏi: <span>" + (currentIndex + 1) + "</span> / " + activeItems.length;
@@ -371,12 +360,11 @@
                 }
                 
                 let safeText = item.text.replace(/'/g, "\\'");
-                let labelPrefix = item.type === "phrase" ? "[Từ vựng] " : "[Câu] ";
 
                 reviewHtml += `
                     <div class="review-item" style="${colorStyle}">
                         <div class="review-text-group">
-                            <div><b>Câu ${index + 1}:</b> ${labelPrefix}"${item.text}" - <b>${icon}</b></div>
+                            <div><b>Câu ${index + 1}:</b> "${item.text}" - <b>${icon}</b></div>
                             <div class="review-trans">${item.meaning}</div>
                         </div>
                         <button class="btn-audio-small" onclick="playSpecificAudio('${safeText}')">🔊 Nghe</button>
@@ -512,7 +500,6 @@
             recognition.start();
         }
 
-        // Tự động khởi chạy ứng dụng sau khi trang nạp xong
         window.onload = function() {
             loadLessonData();
         };
