@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIẾNG ANH LỚP 6 - LUYỆN TẬP PHÁT ÂM NÂNG CAO</title>
+    <title>TIẾNG ANH - HỆ THỐNG LUYỆN TẬP PHÁT ÂM NÂNG CAO</title>
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f8f9fa; margin: 0; }
-        
         .external-brand { color: #8e44ad; font-size: 24px; font-weight: bold; margin-bottom: 15px; letter-spacing: 0.5px; }
-
         .container { max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        
         h1 { color: #9b59b6; font-size: 19px; margin-bottom: 5px; font-weight: bold; }
         .sub-type { color: #555; font-size: 14px; margin-top: 0; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
         #lesson-subtitle { color: #2c3e50; font-size: 15px; margin-top: 0; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; }
@@ -58,19 +55,19 @@
     </style>
 </head>
 <body>
-    <div class="external-brand">ENGLISH JUNIOR 6 - ADVANCED</div>
+    <div class="external-brand">ENGLISH DYNAMIC SYSTEM</div>
 
     <div class="container" id="main-container">
         <h1>LUYỆN TẬP PHÁT ÂM NÂNG CAO</h1>
-        <div class="sub-type">CHỦ ĐỀ: GIA ĐÌNH & CON VẬT (50 CÂU - 30S/CÂU)</div>
-        <div id="lesson-subtitle">UNIT 2: FAMILY & PETS COLLOCATIONS</div>
+        <div class="sub-type" id="sub-type-title">ĐANG TẢI DỮ LIỆU BÀI HỌC...</div>
+        <div id="lesson-subtitle">Đang tải tiêu đề...</div>
         
         <div class="info-bar" id="top-info-bar">
-            <div id="item-status" class="status-pending">⏳ Trạng thái: Chưa hoàn thành</div>
-            <div id="timer-box">⏳ Thời gian làm bài: <span id="time-display">25:00</span></div>
+            <div id="item-status" class="status-pending">⏳ Trạng thái: Đang tải...</div>
+            <div id="timer-box">⏳ Thời gian làm bài: <span id="time-display">--:--</span></div>
         </div>
 
-        <div id="progress"></div>
+        <div id="progress">Đang khởi tạo bài học...</div>
         
         <div id="question"></div>
         
@@ -81,93 +78,53 @@
             <button id="skip-btn" onclick="markAsSkipped()">⏭️ Câu tiếp</button>
         </div>
         
-        <p id="status">Sẵn sàng...</p>
+        <p id="status">Vui lòng đợi...</p>
         <p id="error"></p>
     </div>
 
     <script>
-        const lessonsData = {
-            "1": {
-                title: "50 CỤM TỪ & CÂU NÂNG CAO: GIA ĐÌNH VÀ CON VẬT",
-                items: [
-                    // Phần 1: Cụm từ ghép chủ đề Gia đình & Tính cách (Phrases & Collocations)
-                    { type: "phrase", text: "A close-knit family", ipa: "/ə kləʊs nɪt ˈfæməli/", meaning: "Một gia đình gắn bó khăng khít" },
-                    { type: "phrase", text: "Spend quality time together", ipa: "/spend ˈkwɒləti taɪm təˈɡeðər/", meaning: "Dành thời gian chất lượng bên nhau" },
-                    { type: "phrase", text: "Share household chores", ipa: "/ʃeər ˈhaʊshəʊld tʃɔːrz/", meaning: "Cùng nhau chia sẻ việc nhà" },
-                    { type: "phrase", text: "Take care of each other", ipa: "/teɪk keər əv iːtʃ ˈʌðər/", meaning: "Chăm sóc lẫn nhau" },
-                    { type: "phrase", text: "A supportive mother", ipa: "/ə səˈpɔːtɪv ˈmʌðər/", meaning: "Một người mẹ luôn ủng hộ con cái" },
-                    { type: "phrase", text: "A hardworking father", ipa: "/ə ˈhɑːdˌwɜːkɪŋ ˈfɑːðər/", meaning: "Một người bố chăm chỉ, chịu khó" },
-                    { type: "phrase", text: "Look like my older brother", ipa: "/lʊk laɪk maɪ ˈəʊldər ˈbrʌðər/", meaning: "Trông rất giống anh trai tôi" },
-                    { type: "phrase", text: "Get along well with my sister", ipa: "/ɡet əˈlɒŋ wel wɪð maɪ ˈsɪstər/", meaning: "Hòa thuận tốt với chị/em gái" },
-                    { type: "phrase", text: "Visit our grandparents", ipa: "/ˈvɪzɪt ˈaʊər ˈɡrænfɑːðərz/", meaning: "Đến thăm ông bà của chúng tôi" },
-                    { type: "phrase", text: "Listen to good advice", ipa: "/ˈlɪsn tuː ɡʊd ədˈvaɪs/", meaning: "Lắng nghe những lời khuyên hữu ích" },
-                    { type: "phrase", text: "A warm and happy home", ipa: "/ə wɔːm ənd ˈhæpi həʊm/", meaning: "Một mái ấm gia đình ấm cúng và hạnh phúc" },
-                    { type: "phrase", text: "Have a family gathering", ipa: "/hæv ə ˈfæməli ˈɡæðərɪŋ/", meaning: "Tổ chức một buổi quây quần gia đình" },
-
-                    // Phần 2: Cụm câu giao tiếp diễn tả hoạt động gia đình
-                    { type: "sentence", text: "My parents always encourage me to study hard", meaning: "Bố mẹ tôi luôn khuyến khích tôi học tập chăm chỉ" },
-                    { type: "sentence", text: "We often have dinner together on weekends", meaning: "Chúng tôi thường ăn tối cùng nhau vào cuối tuần" },
-                    { type: "sentence", text: "My mother is the heart of our family", meaning: "Mẹ tôi là trái tim của gia đình chúng tôi" },
-                    { type: "sentence", text: "My father teaches me valuable life lessons", meaning: "Bố tôi dạy tôi những bài học cuộc sống giá trị" },
-                    { type: "sentence", text: "My younger sister always makes me smile", meaning: "Em gái tôi luôn làm tôi mỉm cười" },
-                    { type: "sentence", text: "We share our secrets with each other", meaning: "Chúng tôi chia sẻ những bí mật với nhau" },
-                    { type: "sentence", text: "Family bond is stronger than anything else", meaning: "Mối liên kết gia đình mạnh mẽ hơn bất cứ thứ gì" },
-                    { type: "sentence", text: "Always respect your elders in the family", meaning: "Luôn tôn trọng người lớn tuổi trong gia đình" },
-
-                    // Phần 3: Cụm từ ghép chủ đề Thú cưng & Động vật (Pet Phrases & Collocations)
-                    { type: "phrase", text: "An adorable furry friend", ipa: "/ən əˈdɔːrəbl ˈfɜːri frend/", meaning: "Một người bạn có lông đáng yêu" },
-                    { type: "phrase", text: "A loyal companion", ipa: "/ə ˈlɔɪəl kəmˈpæniən/", meaning: "Một người bạn đồng hành trung thành" },
-                    { type: "phrase", text: "Play fetch in the garden", ipa: "/pleɪ fetʃ ɪn ðə ˈɡɑːdn/", meaning: "Chơi ném bắt bóng ngoài vườn" },
-                    { type: "phrase", text: "Wag its tail happily", ipa: "/wæɡ ɪts teɪl ˈhæpɪli/", meaning: "Vẫy đuôi mừng vui vẻ" },
-                    { type: "phrase", text: "Purr softly on my lap", ipa: "/pɜːr ˈsɒftli ɒn maɪ læp/", meaning: "Kêu gừ gừ nhẹ nhàng trên lòng tôi" },
-                    { type: "phrase", text: "Feed the pets on time", ipa: "/fiːd ðə pets ɒn taɪm/", meaning: "Cho thú cưng ăn đúng giờ" },
-                    { type: "phrase", text: "Take the dog for a walk", ipa: "/teɪk ðə dɒɡ fɔːr ə wɔːk/", meaning: "Dắt chú chó đi dạo" },
-                    { type: "phrase", text: "Brush its soft fur", ipa: "/brʌʃ ɪts sɒft fɜːr/", meaning: "Chải bộ lông mềm mại của nó" },
-                    { type: "phrase", text: "Train a clever puppy", ipa: "/treɪn ə ˈklevər ˈpʌpi/", meaning: "Huấn luyện một chú cún thông minh" },
-                    { type: "phrase", text: "Keep pets clean and safe", ipa: "/kiːp pets kliːn ənd seɪf/", meaning: "Giữ cho thú cưng sạch sẽ và an toàn" },
-                    { type: "phrase", text: "Watch cute animal videos", ipa: "/wɒtʃ kjuːt ˈænɪml ˈvɪdiəʊz/", meaning: "Xem video động vật dễ thương" },
-                    { type: "phrase", text: "Protect wild animals", ipa: "/prəˈtekt waɪld ˈænɪmlz/", meaning: "Bảo vệ động vật hoang dã" },
-
-                    // Phần 4: Cụm câu giao tiếp diễn tả tình yêu thú cưng và thiên nhiên
-                    { type: "sentence", text: "My pet dog greets me when I come home", meaning: "Chú chó cưng chào đón tôi khi tôi về nhà" },
-                    { type: "sentence", text: "Cats love sleeping in warm sunny places", meaning: "Mèo rất thích ngủ ở những nơi ấm áp có nắng" },
-                    { type: "sentence", text: "Taking care of pets teaches us responsibility", meaning: "Chăm sóc thú cưng dạy chúng ta tính trách nhiệm" },
-                    { type: "sentence", text: "Animals can understand human emotions", meaning: "Động vật có thể hiểu được cảm xúc của con người" },
-                    { type: "sentence", text: "We should treat all animals with kindness", meaning: "Chúng ta nên đối xử tử tế với tất cả động vật" },
-                    { type: "sentence", text: "My little cat chases a ball of yarn", meaning: "Chú mèo nhỏ của tôi đang đuổi theo cuộn len" },
-                    { type: "sentence", text: "Birds build their nests high in the trees", meaning: "Chim làm tổ trên cao ở những tán cây" },
-                    { type: "sentence", text: "Wild animals live freely in nature", meaning: "Động vật hoang dã sống tự do trong tự nhiên" },
-
-                    // Phần 5: Các câu hỏi và câu cảm thán mở rộng nâng cao
-                    { type: "sentence", text: "What kind of pets do you like best?", meaning: "Bạn thích loại thú cưng nào nhất?" },
-                    { type: "sentence", text: "How do you help your parents at home?", meaning: "Bạn giúp đỡ bố mẹ ở nhà bằng cách nào?" },
-                    { type: "sentence", text: "Nothing is more valuable than family love", meaning: "Không có gì quý giá hơn tình cảm gia đình" },
-                    { type: "sentence", text: "Let us make our home a peaceful place", meaning: "Hãy cùng nhau biến ngôi nhà thành nơi bình yên" },
-                    { type: "sentence", text: "Pets make our daily life much brighter", meaning: "Thú cưng làm cho cuộc sống hằng ngày tươi sáng hơn" },
-                    { type: "sentence", text: "Always cherish every moment with your family", meaning: "Hãy luôn trân trọng từng khoảnh khắc bên gia đình" },
-                    { type: "sentence", text: "Brighter smiles come from sharing happiness", meaning: "Những nụ cười rạng rỡ bắt nguồn từ việc sẻ chia hạnh phúc" },
-                    { type: "sentence", text: "Animals are truly our faithful companions", meaning: "Động vật thực sự là những người bạn đồng hành trung thành" },
-                    { type: "sentence", text: "Building a strong family takes time and love", meaning: "Xây dựng một gia đình vững chắc cần thời gian và tình yêu" },
-                    { type: "sentence", text: "Have a wonderful journey exploring English", meaning: "Chúc bạn có một hành trình khám phá tiếng Anh thật tuyệt vời" }
-                ]
-            }
-        };
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const lessonId = urlParams.get('lesson') || "1";
-        
-        const currentLesson = lessonsData[lessonId] || lessonsData["1"];
-        document.getElementById('lesson-subtitle').innerText = currentLesson.title;
-
-        let originalItems = [...currentLesson.items];
+        let currentLesson = {};
+        let originalItems = [];
         let activeItems = [];
         let itemIndices = [];
         let itemStatus = [];
         let currentIndex = 0;
-        let totalSeconds = 50 * 30; // 25 phút
-        let initialSeconds = 50 * 30; 
+        let totalSeconds = 0;
+        let initialSeconds = 0;
         let timerInterval;
-        let lastSessionMessage = "🎉 HOÀN THÀNH BÀI LUYỆN TẬP PHÁT ÂM NÂNG CAO!";
+        let lastSessionMessage = "🎉 HOÀN THÀNH BÀI LUYỆN TẬP!";
+
+        // Lấy lesson id từ URL (Ví dụ: ?lesson=1 -> gọi tới /data/lesson1 hoặc /data/lesson1.json tùy cấu trúc server)
+        const urlParams = new URLSearchParams(window.location.search);
+        const lessonId = urlParams.get('lesson') || "1";
+        const dataSourceUrl = `/data/lesson${lessonId}`;
+
+        // Hàm tải dữ liệu động từ tài nguyên
+        async function loadLessonData() {
+            try {
+                const response = await fetch(dataSourceUrl);
+                if (!response.ok) {
+                    throw new Error(`Không thể tải dữ liệu từ ${dataSourceUrl}`);
+                }
+                currentLesson = await response.json();
+                
+                // Khởi tạo các thông số dựa trên dữ liệu tải về
+                document.getElementById('sub-type-title').innerText = currentLesson.subTypeTitle || "CHỦ ĐỀ LUYỆN TẬP NÂNG CAO";
+                document.getElementById('lesson-subtitle').innerText = currentLesson.title;
+                
+                originalItems = [...currentLesson.items];
+                totalSeconds = originalItems.length * 30; // Mặc định 30 giây / câu
+                initialSeconds = totalSeconds;
+
+                initQuiz();
+                startTimer();
+                showQuestion();
+            } catch (error) {
+                console.error(error);
+                document.getElementById('question').innerHTML = `<div style="color: red; font-weight: bold;">Lỗi tải tài nguyên bài học! Vui lòng kiểm tra lại đường dẫn ${dataSourceUrl}.</div>`;
+                document.getElementById('status').innerText = "Không thể bắt đầu bài học.";
+            }
+        }
 
         function getBestEnglishVoice(speechInstance) {
             const voices = window.speechSynthesis.getVoices();
@@ -189,7 +146,6 @@
             };
         }
 
-        // Thuật toán xáo trộn ngẫu nhiên (Fisher-Yates Shuffle)
         function shuffleArray(array) {
             let arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -200,17 +156,13 @@
         }
 
         function initQuiz() {
-            // Đóng gói từng câu cùng index gốc để theo dõi đúng trạng thái
             let combined = originalItems.map((item, index) => ({ item, index }));
-            
-            // Xáo trộn ngẫu nhiên thứ tự các câu trong đề
             let shuffledCombined = shuffleArray(combined);
 
             activeItems = shuffledCombined.map(c => c.item);
             itemIndices = shuffledCombined.map(c => c.index);
             itemStatus = new Array(originalItems.length).fill('pending');
             currentIndex = 0;
-            totalSeconds = 50 * 30; 
         }
 
         function startTimer() {
@@ -243,7 +195,7 @@
                 
                 if (currentItem.type === "phrase") {
                     displayHtml = `
-                        <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CỤM TỪ / COLLOCATION (CHÚ Ý LINKING SOUND)</div>
+                        <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CỤM TỪ / COLLOCATION</div>
                         <div>${currentItem.text}</div>
                         <div style="font-size: 15px; color: #9b59b6; font-weight: normal; margin-top: 4px;">Phiên âm: ${currentItem.ipa}</div>
                         <div class="vietnamese-translation">Nghĩa: ${currentItem.meaning}</div>
@@ -294,7 +246,7 @@
                     skipBtn.style.background = "#6c757d";
                 }
             } else {
-                finishSession("🎉 HOÀN THÀNH BÀI LUYỆN TẬP PHÁT ÂM NÂNG CAO!");
+                finishSession("🎉 HOÀN THÀNH BÀI LUYỆN TẬP!");
             }
         }
 
@@ -306,9 +258,7 @@
                 shorter = s1;
             }
             let longerLength = longer.length;
-            if (longerLength === 0) {
-                return 1.0;
-            }
+            if (longerLength === 0) { return 1.0; }
             return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
         }
 
@@ -319,8 +269,7 @@
             for (let i = 0; i <= s1.length; i++) {
                 let lastValue = i;
                 for (let j = 0; j <= s2.length; j++) {
-                    if (i == 0)
-                        costs[j] = j;
+                    if (i == 0) costs[j] = j;
                     else {
                         if (j > 0) {
                             let newValue = costs[j - 1];
@@ -331,8 +280,7 @@
                         }
                     }
                 }
-                if (s1.length > 0)
-                    costs[s2.length] = lastValue;
+                if (s1.length > 0) costs[s2.length] = lastValue;
             }
             return costs[s2.length];
         }
@@ -357,13 +305,13 @@
             let finalUnfinishedOrSkipped = itemStatus.filter(st => st === 'skipped' || st === 'pending').length;
             let totalItems = originalItems.length;
             
-            let accuracyRate = Math.round((finalPassed / totalItems) * 100);
-            let adviceText = accuracyRate >= 80 ? "Xuất sắc! Khả năng phát âm cụm từ của bạn rất chuẩn xác." : "Hãy tiếp tục luyện tập thêm các cụm từ nối âm nhé.";
+            let accuracyRate = totalItems > 0 ? Math.round((finalPassed / totalItems) * 100) : 0;
+            let adviceText = accuracyRate >= 80 ? "Xuất sắc! Khả năng phát âm rất chuẩn xác." : "Hãy tiếp tục luyện tập thêm để cải thiện phát âm nhé.";
 
             const container = document.getElementById('main-container');
             container.innerHTML = `
                 <h1>LUYỆN TẬP PHÁT ÂM NÂNG CAO</h1>
-                <div class="sub-type">CHỦ ĐỀ: GIA ĐÌNH & CON VẬT (50 CÂU - 30S/CÂU)</div>
+                <div class="sub-type">${currentLesson.subTypeTitle || ""}</div>
                 <div id="lesson-subtitle">${currentLesson.title}</div>
 
                 <div class="info-bar" id="top-info-bar" style="display: none;"></div>
@@ -376,8 +324,8 @@
                         <div style="font-size: 16px; font-weight: bold; color: #495057;">Tỷ lệ đạt chuẩn: ${accuracyRate}%</div>
                         
                         <div style="background: #f3e5f5; padding: 10px; border-radius: 8px; margin: 12px 0; font-size: 14px; color: #4a148c; text-align: left;">
-                            <div>⏱️ <b>Thời gian học viên đã làm:</b> ${timeUsedFormatted}</div>
-                            <div>⏳ <b>Thời gian còn lại:</b> ${timeLeftFormatted} (trên tổng 25:00)</div>
+                            <div>⏱️ <b>Thời gian làm bài:</b> ${timeUsedFormatted}</div>
+                            <div>⏳ <b>Thời gian còn lại:</b> ${timeLeftFormatted}</div>
                         </div>
 
                         <div style="font-size: 14px; color: #856404; margin-top: 8px;">⚠️ ${adviceText}</div>
@@ -385,7 +333,7 @@
                         <div class="stats-box">
                             <div style="border-bottom: 1px solid #dee2e6; padding-bottom: 6px; margin-bottom: 8px; color: #333;">📊 BẢNG THỐNG KÊ CHI TIẾT:</div>
                             <div style="color: #155724;">✅ Số câu ĐÚNG (Đạt): ${finalPassed} câu</div>
-                            <div style="color: #0c5460;">🟡 Số câu GẦN ĐÚNG (Chưa đạt): ${finalApprox} câu</div>
+                            <div style="color: #0c5460;">🟡 Số câu GẦN ĐÚNG: ${finalApprox} câu</div>
                             <div style="color: #721c24;">❌ Số câu chưa đạt / bỏ qua: ${finalUnfinishedOrSkipped} câu</div>
                         </div>
 
@@ -395,10 +343,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="btn-group" id="learning-buttons" style="display: none;"></div>
-                <p id="status" style="display: none;"></p>
-                <p id="error" style="display: none;"></p>
             `;
         }
 
@@ -420,11 +364,8 @@
                 } else if (st === 'approx') {
                     icon = '🟡 Gần đúng (Chưa đạt)';
                     colorStyle = 'color: #0c5460;';
-                } else if (st === 'skipped') {
-                    icon = '⏭️ Đã bỏ qua';
-                    colorStyle = 'color: #721c24;';
                 } else {
-                    icon = '⏳ Chưa hoàn thành';
+                    icon = '⏭️ Đã bỏ qua / Chưa đạt';
                     colorStyle = 'color: #721c24;';
                 }
                 
@@ -446,7 +387,7 @@
             const container = document.getElementById('main-container');
             container.innerHTML = `
                 <h1>LUYỆN TẬP PHÁT ÂM NÂNG CAO</h1>
-                <div class="sub-type">CHỦ ĐỀ: GIA ĐÌNH & CON VẬT (50 CÂU - 30S/CÂU)</div>
+                <div class="sub-type">${currentLesson.subTypeTitle || ""}</div>
                 <div id="lesson-subtitle">${currentLesson.title}</div>
                 ${reviewHtml}
             `;
@@ -459,9 +400,7 @@
                 utterance.lang = 'en-US';
                 utterance.rate = 0.82; 
                 utterance.pitch = 1.0;
-                
                 getBestEnglishVoice(utterance);
-
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -485,9 +424,7 @@
                 utterance.lang = 'en-US';
                 utterance.rate = 0.82;
                 utterance.pitch = 1.0;
-
                 getBestEnglishVoice(utterance);
-
                 window.speechSynthesis.speak(utterance);
                 document.getElementById('status').innerText = "🔊 Đang phát âm mẫu...";
             } else {
@@ -513,13 +450,11 @@
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             
             if (!SpeechRecognition) {
-                document.getElementById('error').innerText = "Trình duyệt của bạn không hỗ trợ nhận diện giọng nói. Vui lòng dùng Chrome.";
+                document.getElementById('error').innerText = "Trình duyệt không hỗ trợ nhận diện giọng nói. Vui lòng dùng Chrome.";
                 return;
             }
 
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
 
             const recognition = new SpeechRecognition();
             recognition.lang = 'en-US';
@@ -532,7 +467,7 @@
             recognition.onerror = (event) => {
                 document.getElementById('status').innerText = "Chưa nhận diện được giọng nói!";
                 if (event.error === 'not-allowed') {
-                    document.getElementById('error').innerText = "Trình duyệt chưa được cấp quyền Micro. Vui lòng bật Micro trong cài đặt trang web.";
+                    document.getElementById('error').innerText = "Trình duyệt chưa được cấp quyền Micro.";
                 } else {
                     document.getElementById('error').innerText = "Chưa nghe rõ, vui lòng bấm nói lại.";
                 }
@@ -564,22 +499,20 @@
 
                 } else if (similarity >= 0.55) {
                     itemStatus[realIdx] = 'approx';
-                    document.getElementById('status').innerText = "🟡 Gần đúng: \"" + transcript + "\". Vẫn tính là chưa đạt, bạn có thể nói lại hoặc bấm Câu tiếp.";
+                    document.getElementById('status').innerText = "🟡 Gần đúng: \"" + transcript + "\".";
                     const statusTag = document.getElementById('item-status');
                     statusTag.className = "status-approx";
                     statusTag.innerText = "🟡 Trạng thái: Gần đúng (Chưa đạt)";
-
                 } else {
-                    document.getElementById('status').innerText = "❌ Bạn nói: \"" + transcript + "\". Thử lại hoặc bấm Bỏ qua/Câu tiếp.";
+                    document.getElementById('status').innerText = "❌ Bạn nói: \"" + transcript + "\". Thử lại nhé!";
                 }
             };
 
             recognition.start();
         }
 
-        initQuiz();
-        startTimer();
-        showQuestion();
+        // Bắt đầu chạy ứng dụng bằng cách tải dữ liệu bài học
+        loadLessonData();
     </script>
 </body>
 </html>
