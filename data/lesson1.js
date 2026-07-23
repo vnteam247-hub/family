@@ -3,7 +3,7 @@ const lessonsData = {
         subTypeTitle: "CHỦ ĐỀ: PHÁT ÂM HẬU TỐ '-ED' NÂNG CAO (60 CÂU - 30S/CÂU)",
         title: "PRONUNCIATION OF '-ED': /t/, /d/, AND /ɪd/",
         items: [
-            { type: "phrase", text: "arrived", ipa: "/əˈraɪvd/", meaning: "Đã đến (Âm /d/)" },
+            { type: "phrase", text: "arrived", ipa: "/əˈraɪvd/", meaning: "Đã đến" }
             { type: "phrase", text: "believed", ipa: "/bɪˈliːvd/", meaning: "Đã tin tưởng (Âm /d/)" },
             { type: "phrase", text: "received", ipa: "/rɪˈsiːvd/", meaning: "Đã nhận (Âm /d/)" },
             { type: "phrase", text: "hoped", ipa: "/hoʊpt/", meaning: "Đã hy vọng (Âm /t/)" },
