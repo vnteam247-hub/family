@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIẾNG ANH - HỆ THỐNG LUYỆN TẬP PHÁT ÂM NÂNG CAO</title>
+    
+    <!-- Nhúng file dữ liệu bài học trực tiếp để đồng bộ trên GitHub Pages -->
+    <script src="./data/lesson1.js"></script>
+
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f8f9fa; margin: 0; }
         .external-brand { color: #8e44ad; font-size: 24px; font-weight: bold; margin-bottom: 15px; letter-spacing: 0.5px; }
@@ -59,7 +63,7 @@
 
     <div class="container" id="main-container">
         <h1>LUYỆN TẬP PHÁT ÂM NÂNG CAO</h1>
-        <div class="sub-type" id="sub-type-title">ĐANG TẢI DỮ LIỆU BÀI HỌC...</div>
+        <div class="sub-type" id="sub-type-title">ĐANG KHỞI TẠO BÀI HỌC...</div>
         <div id="lesson-subtitle">Đang tải tiêu đề...</div>
         
         <div class="info-bar" id="top-info-bar">
@@ -67,7 +71,7 @@
             <div id="timer-box">⏳ Thời gian làm bài: <span id="time-display">--:--</span></div>
         </div>
 
-        <div id="progress">Đang khởi tạo bài học...</div>
+        <div id="progress">Đang tải dữ liệu...</div>
         
         <div id="question"></div>
         
@@ -94,26 +98,23 @@
         let timerInterval;
         let lastSessionMessage = "🎉 HOÀN THÀNH BÀI LUYỆN TẬP!";
 
-        // Lấy lesson id từ URL (Ví dụ: ?lesson=1 -> gọi tới /data/lesson1 hoặc /data/lesson1.json tùy cấu trúc server)
         const urlParams = new URLSearchParams(window.location.search);
         const lessonId = urlParams.get('lesson') || "1";
-        const dataSourceUrl = `/data/lesson${lessonId}`;
 
-        // Hàm tải dữ liệu động từ tài nguyên
-        async function loadLessonData() {
+        // Hàm nạp dữ liệu từ biến lessonsData đã được khai báo ở file lesson1.js
+        function loadLessonData() {
             try {
-                const response = await fetch(dataSourceUrl);
-                if (!response.ok) {
-                    throw new Error(`Không thể tải dữ liệu từ ${dataSourceUrl}`);
+                if (typeof lessonsData === 'undefined' || !lessonsData[lessonId]) {
+                    throw new Error(`Không tìm thấy dữ liệu cho bài học số ${lessonId}`);
                 }
-                currentLesson = await response.json();
                 
-                // Khởi tạo các thông số dựa trên dữ liệu tải về
+                currentLesson = lessonsData[lessonId];
+                
                 document.getElementById('sub-type-title').innerText = currentLesson.subTypeTitle || "CHỦ ĐỀ LUYỆN TẬP NÂNG CAO";
                 document.getElementById('lesson-subtitle').innerText = currentLesson.title;
                 
                 originalItems = [...currentLesson.items];
-                totalSeconds = originalItems.length * 30; // Mặc định 30 giây / câu
+                totalSeconds = originalItems.length * 30; // 30 giây / câu
                 initialSeconds = totalSeconds;
 
                 initQuiz();
@@ -121,7 +122,7 @@
                 showQuestion();
             } catch (error) {
                 console.error(error);
-                document.getElementById('question').innerHTML = `<div style="color: red; font-weight: bold;">Lỗi tải tài nguyên bài học! Vui lòng kiểm tra lại đường dẫn ${dataSourceUrl}.</div>`;
+                document.getElementById('question').innerHTML = `<div style="color: red; font-weight: bold;">Lỗi tải dữ liệu bài học! Vui lòng kiểm tra lại file lesson${lessonId}.js trong thư mục data.</div>`;
                 document.getElementById('status').innerText = "Không thể bắt đầu bài học.";
             }
         }
@@ -195,16 +196,16 @@
                 
                 if (currentItem.type === "phrase") {
                     displayHtml = `
-                        <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CỤM TỪ / COLLOCATION</div>
+                        <div style="font-size: 13px; color: #8e44ad; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">TỪ VỰNG / CỤM TỪ (PHÁT ÂM -ED)</div>
                         <div>${currentItem.text}</div>
                         <div style="font-size: 15px; color: #9b59b6; font-weight: normal; margin-top: 4px;">Phiên âm: ${currentItem.ipa}</div>
-                        <div class="vietnamese-translation">Nghĩa: ${currentItem.meaning}</div>
+                        <div class="vietnamese-translation">Ý nghĩa: ${currentItem.meaning}</div>
                     `;
                 } else {
                     displayHtml = `
-                        <div style="font-size: 13px; color: #9b59b6; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CÂU GIAO TIẾP NÂNG CAO</div>
+                        <div style="font-size: 13px; color: #9b59b6; font-weight: bold; margin-bottom: 2px; text-transform: uppercase;">CÂU LUYỆN TẬP</div>
                         <div>${currentItem.text.charAt(0).toUpperCase() + currentItem.text.slice(1)}</div>
-                        <div class="vietnamese-translation">Nghĩa: ${currentItem.meaning}</div>
+                        <div class="vietnamese-translation">Ý nghĩa: ${currentItem.meaning}</div>
                     `;
                 }
 
@@ -306,7 +307,7 @@
             let totalItems = originalItems.length;
             
             let accuracyRate = totalItems > 0 ? Math.round((finalPassed / totalItems) * 100) : 0;
-            let adviceText = accuracyRate >= 80 ? "Xuất sắc! Khả năng phát âm rất chuẩn xác." : "Hãy tiếp tục luyện tập thêm để cải thiện phát âm nhé.";
+            let adviceText = accuracyRate >= 80 ? "Xuất sắc! Khả năng phát âm của bạn rất chuẩn xác." : "Hãy tiếp tục luyện tập thêm để nắm vững các quy tắc phát âm nhé.";
 
             const container = document.getElementById('main-container');
             container.innerHTML = `
@@ -370,7 +371,7 @@
                 }
                 
                 let safeText = item.text.replace(/'/g, "\\'");
-                let labelPrefix = item.type === "phrase" ? "[Cụm từ] " : "[Câu nói] ";
+                let labelPrefix = item.type === "phrase" ? "[Từ vựng] " : "[Câu] ";
 
                 reviewHtml += `
                     <div class="review-item" style="${colorStyle}">
@@ -511,8 +512,10 @@
             recognition.start();
         }
 
-        // Bắt đầu chạy ứng dụng bằng cách tải dữ liệu bài học
-        loadLessonData();
+        // Tự động khởi chạy ứng dụng sau khi trang nạp xong
+        window.onload = function() {
+            loadLessonData();
+        };
     </script>
 </body>
 </html>
